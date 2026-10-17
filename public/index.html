@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kamran Ali | Civil Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --navy:#0d1b2a; --navy2:#112236; --blue:#1a3a5c;
+      --accent:#e8a030; --accent2:#c97d1a;
+      --muted:#8b9bb0; --white:#ffffff; --border:rgba(255,255,255,0.08);
+    }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Outfit',sans-serif; background:var(--navy); color:var(--white); overflow-x:hidden; cursor:none; }
+
+    /* CURSOR */
+    .cursor { width:10px; height:10px; background:var(--accent); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+    .cursor-ring { width:36px; height:36px; border:1.5px solid rgba(232,160,48,0.5); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width 0.3s, height 0.3s; }
+
+    /* NOISE */
+    body::before { content:''; position:fixed; inset:0; z-index:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; opacity:0.4; }
+
+    /* NAV */
+    nav { position:fixed; top:0; width:100%; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 6%; background:rgba(13,27,42,0.85); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--white); }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:2.2rem; list-style:none; }
+    .nav-links a { font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.3s; position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--accent); transition:width 0.3s; }
+    .nav-links a:hover { color:var(--accent); }
+    .nav-links a:hover::after { width:100%; }
+
+    /* HERO */
+    .hero { min-height:100vh; display:grid; grid-template-columns:1.1fr 0.9fr; padding-top:5rem; position:relative; overflow:hidden; }
+    .hero::after { content:''; position:absolute; inset:0; z-index:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:60px 60px; animation:gridMove 20s linear infinite; }
+    @keyframes gridMove { 0%{background-position:0 0} 100%{background-position:60px 60px} }
+    .hero-left { display:flex; flex-direction:column; justify-content:center; padding:8% 6% 8% 8%; position:relative; z-index:1; }
+    .hero-tag { display:inline-flex; align-items:center; gap:0.7rem; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:1.5rem; opacity:0; animation:slideIn 0.8s ease 0.2s forwards; }
+    .hero-tag-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.6);opacity:0.5} }
+    .hero-name { font-family:'Playfair Display',serif; font-size:clamp(3rem,5.5vw,5.2rem); font-weight:900; line-height:1.05; margin-bottom:0.5rem; opacity:0; animation:slideIn 0.8s ease 0.4s forwards; }
+    .hero-name .line2 { color:var(--accent); }
+    .hero-title { font-size:1rem; font-weight:300; color:var(--muted); letter-spacing:0.08em; margin-bottom:1.8rem; opacity:0; animation:slideIn 0.8s ease 0.55s forwards; }
+    .hero-desc { font-size:0.97rem; line-height:1.8; color:rgba(255,255,255,0.65); max-width:460px; margin-bottom:2.5rem; opacity:0; animation:slideIn 0.8s ease 0.7s forwards; }
+    .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; opacity:0; animation:slideIn 0.8s ease 0.85s forwards; }
+    .btn-gold { background:var(--accent); color:var(--navy); padding:0.85rem 2rem; font-size:0.82rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:all 0.3s; clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px)); }
+    .btn-gold:hover { background:var(--accent2); transform:translateY(-2px); }
+    .btn-ghost { border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.7); padding:0.85rem 2rem; font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
+    .btn-ghost:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+    .hero-stats { display:flex; gap:2.5rem; margin-top:3rem; opacity:0; animation:slideIn 0.8s ease 1s forwards; }
+    .stat-num { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--accent); line-height:1; }
+    .stat-label { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:0.3rem; }
+    .hero-right { position:relative; display:flex; align-items:center; justify-content:center; padding:4rem 4rem 4rem 2rem; z-index:1; }
+    .hero-photo-wrap { position:relative; width:100%; max-width:400px; opacity:0; animation:fadeScale 1s ease 0.6s forwards; }
+    @keyframes fadeScale { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+    .hero-photo-bg { position:absolute; inset:-12px; border:1px solid rgba(232,160,48,0.25); clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px)); }
+    .hero-photo-bg2 { position:absolute; inset:-24px; border:1px solid rgba(232,160,48,0.1); clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px)); }
+    .hero-photo { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top; display:block; clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px)); filter:brightness(0.95) contrast(1.05); }
+    .hero-badge { position:absolute; bottom:-1rem; left:-1rem; background:var(--accent); color:var(--navy); padding:1rem 1.4rem; font-weight:600; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+    .blob { position:absolute; border-radius:50%; filter:blur(60px); opacity:0.12; pointer-events:none; z-index:0; animation:blobFloat 8s ease-in-out infinite; }
+    .blob1 { width:400px; height:400px; background:#1a6bbf; top:-100px; right:-100px; }
+    .blob2 { width:300px; height:300px; background:var(--accent); bottom:0; left:-80px; animation-delay:-4s; }
+    @keyframes blobFloat { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,-30px) scale(1.05)} }
+    @keyframes slideIn { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+    /* SECTIONS */
+    section { padding:6rem 8%; position:relative; }
+    .section-header { margin-bottom:3rem; }
+    .section-eyebrow { font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--accent); margin-bottom:0.7rem; display:block; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:700; line-height:1.15; }
+    .section-line { width:3rem; height:2px; background:var(--accent); margin-top:1rem; }
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1{transition-delay:0.1s} .reveal-delay-2{transition-delay:0.2s}
+    .reveal-delay-3{transition-delay:0.3s} .reveal-delay-4{transition-delay:0.4s}
+    .reveal-delay-5{transition-delay:0.5s}
+
+    /* ABOUT */
+    .about { background:var(--navy2); }
+    .about-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:5rem; align-items:center; }
+    .about-img-wrap { position:relative; }
+    .about-img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:top; clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px)); filter:brightness(0.9); transition:filter 0.4s; }
+    .about-img:hover { filter:brightness(1); }
+    .about-img-border { position:absolute; inset:-12px; border:1px solid rgba(232,160,48,0.3); clip-path:polygon(0 0,calc(100% - 30px) 0,100% 30px,100% 100%,30px 100%,0 calc(100% - 30px)); pointer-events:none; }
+    .about-corner { position:absolute; bottom:-2rem; right:-2rem; width:5rem; height:5rem; border-right:2px solid var(--accent); border-bottom:2px solid var(--accent); }
+    .about-text p { font-size:0.97rem; line-height:1.85; color:rgba(255,255,255,0.65); margin-bottom:1.3rem; }
+    .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; }
+    .info-item { border:1px solid var(--border); padding:1rem 1.2rem; transition:border-color 0.3s,background 0.3s; }
+    .info-item:hover { border-color:var(--accent); background:rgba(232,160,48,0.05); }
+    .info-item .key { font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:0.35rem; }
+    .info-item .val { font-size:0.9rem; color:rgba(255,255,255,0.8); }
+    /* clickable contact links */
+    .info-item .val a { color:rgba(255,255,255,0.8); text-decoration:none; transition:color 0.25s; }
+    .info-item .val a:hover { color:var(--accent); text-decoration:underline; }
+
+    /* SERVICES */
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .service-card { background:var(--navy); padding:2.5rem 2rem; transition:background 0.3s; position:relative; overflow:hidden; }
+    .service-card::before { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent); transition:width 0.4s ease; }
+    .service-card:hover::before { width:100%; }
+    .service-card:hover { background:rgba(26,58,92,0.6); }
+    .service-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:900; color:rgba(232,160,48,0.08); position:absolute; top:1rem; right:1.5rem; }
+    .service-icon { font-size:1.8rem; margin-bottom:1.2rem; }
+    .service-card h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:600; margin-bottom:0.7rem; }
+    .service-card p { font-size:0.86rem; line-height:1.7; color:var(--muted); }
+
+    /* EXPERIENCE */
+    .experience { background:var(--navy2); }
+    .timeline { position:relative; padding-left:2rem; margin-top:1rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,var(--accent),transparent); }
+    .tl-item { position:relative; padding-bottom:3rem; }
+    .tl-dot { position:absolute; left:-2.3rem; top:0.5rem; width:0.55rem; height:0.55rem; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px rgba(232,160,48,0.15); }
+    .tl-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:0.5rem; }
+    .tl-period { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); background:rgba(232,160,48,0.1); padding:0.25rem 0.8rem; border:1px solid rgba(232,160,48,0.2); }
+    .tl-role { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:600; margin:0.5rem 0 0.2rem; }
+    .tl-company { font-size:0.85rem; color:var(--muted); margin-bottom:0.9rem; }
+    .tl-list { list-style:none; }
+    .tl-list li { font-size:0.88rem; color:rgba(255,255,255,0.6); line-height:1.7; padding:0.25rem 0; display:flex; gap:0.7rem; align-items:flex-start; }
+    .tl-list li::before { content:'▸'; color:var(--accent); font-size:0.7rem; margin-top:0.35rem; flex-shrink:0; }
+
+    /* SKILLS */
+    .skills-wrap { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:1rem; }
+    .skill-group-title { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:600; margin-bottom:1.8rem; padding-bottom:0.7rem; border-bottom:1px solid var(--border); }
+    .skill-row { margin-bottom:1.4rem; }
+    .skill-top { display:flex; justify-content:space-between; margin-bottom:0.5rem; }
+    .skill-name { font-size:0.85rem; color:rgba(255,255,255,0.75); }
+    .skill-pct  { font-size:0.78rem; color:var(--accent); font-weight:600; }
+    .skill-bar  { height:3px; background:rgba(255,255,255,0.07); }
+    .skill-fill { height:100%; background:linear-gradient(to right,var(--accent2),var(--accent)); width:0; transition:width 1.4s cubic-bezier(0.23,1,0.32,1); }
+    .soft-skills { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1rem; }
+    .soft-tag { border:1px solid rgba(232,160,48,0.3); color:var(--accent); font-size:0.75rem; padding:0.35rem 0.9rem; transition:all 0.3s; }
+    .soft-tag:hover { background:rgba(232,160,48,0.1); }
+
+    /* PROJECTS */
+    .projects { background:var(--navy2); }
+    .projects-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1rem; }
+    .project-card { position:relative; overflow:hidden; cursor:pointer; border:1px solid var(--border); transition:border-color 0.4s; }
+    .project-card:hover { border-color:rgba(232,160,48,0.4); }
+    .project-img-wrap { overflow:hidden; aspect-ratio:16/9; }
+    .project-img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease,filter 0.4s; filter:brightness(0.8) saturate(0.8); }
+    .project-card:hover .project-img { transform:scale(1.06); filter:brightness(0.6) saturate(0.6); }
+    .project-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.4s; background:rgba(13,27,42,0.5); }
+    .project-card:hover .project-overlay { opacity:1; }
+    .project-tag { position:absolute; top:1rem; left:1rem; background:var(--accent); color:var(--navy); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.3rem 0.8rem; font-weight:600; }
+    .project-info { padding:1.5rem; }
+    .project-info h3 { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:600; margin-bottom:0.5rem; }
+    .project-info p { font-size:0.85rem; line-height:1.7; color:var(--muted); }
+    .project-meta { display:flex; gap:1.5rem; margin-top:0.9rem; flex-wrap:wrap; }
+    .project-meta span { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(232,160,48,0.7); }
+
+    /* EDUCATION */
+    .edu-certs-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:1rem; }
+    .edu-block-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:600; margin-bottom:1.8rem; }
+    .edu-card { border:1px solid var(--border); padding:1.5rem; margin-bottom:1rem; transition:border-color 0.3s,background 0.3s; position:relative; overflow:hidden; }
+    .edu-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent); transform:scaleY(0); transition:transform 0.3s; transform-origin:top; }
+    .edu-card:hover::before { transform:scaleY(1); }
+    .edu-card:hover { border-color:rgba(232,160,48,0.3); background:rgba(232,160,48,0.03); }
+    .edu-year { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem; }
+    .edu-card h4 { font-size:0.95rem; color:var(--white); margin-bottom:0.2rem; }
+    .edu-card p  { font-size:0.82rem; color:var(--muted); }
+    .cert-list { list-style:none; }
+    .cert-item { display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--border); transition:transform 0.3s; }
+    .cert-item:hover { transform:translateX(6px); }
+    .cert-icon { color:var(--accent); font-size:1rem; flex-shrink:0; margin-top:0.1rem; }
+    .cert-item strong { display:block; font-size:0.88rem; color:var(--white); margin-bottom:0.15rem; }
+    .cert-item span   { font-size:0.78rem; color:var(--muted); }
+
+    /* ── DOCUMENTS SECTION ─────────────────────────────────── */
+    .documents { background:var(--navy2); }
+    .docs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.2rem; margin-top:1rem; }
+    .doc-card {
+      border:1px solid var(--border); padding:1.5rem 1.2rem;
+      display:flex; flex-direction:column; gap:0.8rem;
+      transition:border-color 0.3s,background 0.3s;
+      position:relative; overflow:hidden;
+    }
+    .doc-card::before { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent); transition:width 0.4s; }
+    .doc-card:hover::before { width:100%; }
+    .doc-card:hover { border-color:rgba(232,160,48,0.3); background:rgba(232,160,48,0.03); }
+    .doc-icon { font-size:2rem; }
+    .doc-type { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); }
+    .doc-name { font-size:0.9rem; font-weight:500; color:var(--white); }
+    .doc-actions { display:flex; gap:0.6rem; margin-top:auto; }
+    .doc-btn {
+      flex:1; padding:0.5rem; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;
+      text-align:center; text-decoration:none; font-family:'Outfit',sans-serif;
+      cursor:pointer; transition:all 0.3s; border:none;
+    }
+    .doc-btn-view     { background:rgba(232,160,48,0.15); color:var(--accent); }
+    .doc-btn-view:hover { background:rgba(232,160,48,0.3); }
+    .doc-btn-download { background:var(--accent); color:var(--navy); font-weight:600; }
+    .doc-btn-download:hover { background:var(--accent2); }
+    .docs-empty { color:var(--muted); font-size:0.9rem; padding:2rem 0; }
+    .docs-loading { color:var(--muted); font-size:0.9rem; padding:1rem 0; }
+
+    /* DOC VIEWER MODAL */
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:500; display:none; align-items:center; justify-content:center; }
+    .modal-overlay.open { display:flex; }
+    .modal-box { background:var(--navy2); border:1px solid var(--border); width:90vw; max-width:900px; height:85vh; display:flex; flex-direction:column; }
+    .modal-header { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.5rem; border-bottom:1px solid var(--border); }
+    .modal-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--white); }
+    .modal-close { background:none; border:none; color:var(--muted); font-size:1.5rem; cursor:pointer; transition:color 0.2s; }
+    .modal-close:hover { color:var(--accent); }
+    .modal-body { flex:1; overflow:hidden; }
+    .modal-body iframe { width:100%; height:100%; border:none; }
+    .modal-body img.doc-preview { width:100%; height:100%; object-fit:contain; }
+
+    /* LANGUAGES & HOBBIES */
+    .extra { background:var(--navy2); }
+    .extra-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:1rem; }
+    .lang-list { display:flex; flex-direction:column; gap:1rem; }
+    .lang-item { display:flex; justify-content:space-between; align-items:center; }
+    .lang-name { font-size:0.9rem; }
+    .lang-dots { display:flex; gap:0.3rem; }
+    .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.15); }
+    .dot.filled { background:var(--accent); }
+    .hobby-tags { display:flex; flex-wrap:wrap; gap:0.7rem; }
+    .hobby-tag { border:1px solid var(--border); padding:0.5rem 1.2rem; font-size:0.82rem; color:rgba(255,255,255,0.65); transition:all 0.3s; display:flex; align-items:center; gap:0.5rem; }
+    .hobby-tag:hover { border-color:var(--accent); color:var(--accent); }
+
+    /* CONTACT */
+    .contact { background:var(--navy); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; margin-top:1rem; }
+    .contact-info p { font-size:0.97rem; line-height:1.8; color:rgba(255,255,255,0.6); margin-bottom:2rem; }
+    .contact-items { display:flex; flex-direction:column; gap:1.2rem; }
+    .contact-item { display:flex; align-items:center; gap:1.2rem; }
+    .c-icon { width:2.8rem; height:2.8rem; border:1px solid rgba(232,160,48,0.3); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; color:var(--accent); transition:background 0.3s; }
+    .contact-item:hover .c-icon { background:rgba(232,160,48,0.1); }
+    .c-label { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:0.2rem; }
+    /* ← clickable links in contact section */
+    .c-value a { font-size:0.88rem; color:rgba(255,255,255,0.75); text-decoration:none; transition:color 0.25s; }
+    .c-value a:hover { color:var(--accent); text-decoration:underline; }
+    .c-value span { font-size:0.88rem; color:rgba(255,255,255,0.75); }
+
+    .contact-form { display:flex; flex-direction:column; gap:1rem; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .contact-form input, .contact-form textarea { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--white); padding:0.9rem 1.2rem; font-family:'Outfit',sans-serif; font-size:0.88rem; outline:none; width:100%; transition:border-color 0.3s,background 0.3s; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color:rgba(255,255,255,0.25); }
+    .contact-form input:focus, .contact-form textarea:focus { border-color:var(--accent); background:rgba(232,160,48,0.04); }
+    .contact-form textarea { resize:vertical; min-height:120px; }
+    .contact-form button { background:var(--accent); color:var(--navy); border:none; padding:0.9rem 2.2rem; font-family:'Outfit',sans-serif; font-size:0.82rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.3s; align-self:flex-start; clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); }
+    .contact-form button:hover { background:var(--accent2); transform:translateY(-2px); }
+    .form-status { font-size:0.85rem; padding:0.6rem 1rem; margin-top:0.5rem; display:none; }
+    .form-status.success { background:rgba(50,200,100,0.1); border:1px solid rgba(50,200,100,0.3); color:#5ddb8a; display:block; }
+    .form-status.error   { background:rgba(220,60,60,0.1); border:1px solid rgba(220,60,60,0.3); color:#f87171; display:block; }
+
+    /* FOOTER */
+    footer { background:#07111c; padding:1.8rem 8%; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
+    footer p { font-size:0.78rem; color:rgba(255,255,255,0.25); }
+    .footer-logo { font-family:'Playfair Display',serif; font-size:1.1rem; color:rgba(255,255,255,0.3); }
+    .footer-logo span { color:rgba(232,160,48,0.5); }
+
+    /* SCROLL TOP */
+    .scroll-top { position:fixed; bottom:2rem; right:2rem; z-index:50; width:2.5rem; height:2.5rem; background:var(--accent); color:var(--navy); border:none; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.4s,transform 0.3s; clip-path:polygon(50% 0%,100% 50%,85% 50%,85% 100%,15% 100%,15% 50%,0% 50%); }
+    .scroll-top.visible { opacity:1; }
+    .scroll-top:hover { transform:translateY(-4px); }
+
+    /* RESPONSIVE */
+    @media (max-width:960px) {
+      .hero{grid-template-columns:1fr} .hero-right{padding:3rem;height:60vw}
+      .about-grid{grid-template-columns:1fr;gap:3rem} .services-grid{grid-template-columns:1fr}
+      .skills-wrap{grid-template-columns:1fr} .projects-grid{grid-template-columns:1fr}
+      .edu-certs-grid{grid-template-columns:1fr} .extra-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr;gap:3rem} .form-row{grid-template-columns:1fr}
+      footer{flex-direction:column;gap:0.5rem;text-align:center} .nav-links{display:none}
+      .info-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+<!-- DOCUMENT VIEWER MODAL -->
+<div class="modal-overlay" id="docModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle">Document</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Kamran<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#documents">Documents</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="hero-left">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>QA/QC Civil Engineer · Rawalpindi, Pakistan</div>
+    <h1 class="hero-name">Kamran<br><span class="line2">Ali</span></h1>
+    <p class="hero-title">BSc Civil Engineering &nbsp;·&nbsp; 5+ Years Experience</p>
+    <p class="hero-desc">Highly motivated Civil Engineer specialising in QA/QC, site supervision, and structural analysis. Skilled in construction quality management and compliance — seeking high-standard opportunities in the Gulf region.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-gold">View Projects</a>
+      <a href="#contact" class="btn-ghost">Work With Me</a>
+    </div>
+
+    <!-- ============================================================
+         THIS IS WHAT YOU WANT TO CHANGE
+         Edit the numbers (e.g. "5+" / "6" / "3") and labels below.
+         Numbers animate from 0 automatically on page load.
+         ============================================================ -->
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Companies Worked</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Cities Active</div></div>
+    </div>
+    <!-- ============================================================ -->
+
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-bg2"></div>
+      <div class="hero-photo-bg"></div>
+      <img class="hero-photo" src="images/ChatGPT Image Apr 18, 2026, 03_58_24 PM.png" alt="Kamran Ali – Civil Engineer" id="profilePhoto"/>
+      <div class="hero-badge">Available for work</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <img class="about-img" src="images/Gemini_Generated_Image_izczaizczaizczai.png" alt="Engineering site"/>
+      <div class="about-img-border"></div>
+      <div class="about-corner"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">About Me</span>
+        <h2 class="section-title">Dedicated to Building Quality Infrastructure</h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="reveal reveal-delay-1">I am a highly motivated and dedicated Civil Engineer with over 5 years of professional experience spanning QA/QC, site supervision, and structural analysis. My career has taken me through leading construction firms in Islamabad, Rawalpindi, and Lahore.</p>
+      <p class="reveal reveal-delay-2">Proficient in ETABS, AutoCAD, PlanSwift, and Primavera, I bring both technical precision and strong leadership to every project. I am passionate about ensuring construction quality, managing documentation, and driving projects to successful completion.</p>
+      <div class="info-grid reveal reveal-delay-3">
+        <div class="info-item"><div class="key">Location</div><div class="val">Rawalpindi, Pakistan</div></div>
+        <div class="info-item"><div class="key">Phone</div><div class="val"><a href="tel:+923030157596">+92 303 0157596</a></div></div>
+        <div class="info-item"><div class="key">Email</div><div class="val"><a href="mailto:engr.kamranali810@gmail.com">engr.kamranali810@gmail.com</a></div></div>
+        <div class="info-item"><div class="key">Target</div><div class="val">Gulf Region Opportunities</div></div>
+        <div class="info-item"><div class="key">Status</div><div class="val">Open to Opportunities</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">What I Offer</span>
+    <h2 class="section-title">Engineering Services</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><div class="service-num">01</div><div class="service-icon">🔍</div><h3>Quality Control & Assurance</h3><p>Preparing and implementing Project Quality Management Plans, controlling quality documents, and issuing Non-Conformance Reports (NCRs).</p></div>
+    <div class="service-card reveal reveal-delay-1"><div class="service-num">02</div><div class="service-icon">🏗️</div><h3>Site Supervision & Monitoring</h3><p>Supervising daily site operations, conducting inspections for safety and quality, and ensuring compliance with approved plans and specifications.</p></div>
+    <div class="service-card reveal reveal-delay-2"><div class="service-num">03</div><div class="service-icon">🧪</div><h3>Material Testing & Reporting</h3><p>Coordinating and witnessing on-site and off-site material testing, reviewing construction methods, and preparing detailed reports.</p></div>
+    <div class="service-card reveal reveal-delay-3"><div class="service-num">04</div><div class="service-icon">📐</div><h3>Structural Analysis</h3><p>Designing building prototype models using ETABS, evaluating project risks and materials, and conducting structural analysis for construction projects.</p></div>
+    <div class="service-card reveal reveal-delay-4"><div class="service-num">05</div><div class="service-icon">📋</div><h3>Estimation & Quantity Take-off</h3><p>Preparing accurate project cost estimates, quantity take-offs using PlanSwift, and detailed project schedules and specifications.</p></div>
+    <div class="service-card reveal reveal-delay-5"><div class="service-num">06</div><div class="service-icon">🤝</div><h3>Project Coordination</h3><p>Coordinating with project managers, contractors, and stakeholders, and maintaining comprehensive project documentation throughout the lifecycle.</p></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Career Journey</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-header"><div><div class="tl-role">QA/QC Civil Engineer</div><div class="tl-company">Ms Noor Ud Din Construction Company · Islamabad</div></div><span class="tl-period">Nov 2024 – Current</span></div><ul class="tl-list"><li>Prepared and implemented the Project Quality Management Plan</li><li>Controlled quality-related documents including material submittals and test certificates</li><li>Conducted daily and stage-wise inspections of civil works</li><li>Ensured materials and workmanship met project specifications</li><li>Coordinated and witnessed on-site and off-site material testing</li><li>Issued and tracked Non-Conformance Reports (NCRs) and collaborated on corrective actions</li></ul></div>
+    <div class="tl-item reveal reveal-delay-1"><div class="tl-dot"></div><div class="tl-header"><div><div class="tl-role">Site Civil Engineer</div><div class="tl-company">Mirza Areeb Constructions | SMC · Islamabad</div></div><span class="tl-period">Aug 2023 – Sep 2024</span></div><ul class="tl-list"><li>Coordinated with project managers, contractors, and stakeholders</li><li>Supervised daily site operations ensuring compliance with approved plans</li><li>Conducted inspections for safety, quality, and adherence to standards</li><li>Reviewed materials and construction methods for compliance</li><li>Prepared daily progress reports and maintained comprehensive site records</li></ul></div>
+    <div class="tl-item reveal reveal-delay-2"><div class="tl-dot"></div><div class="tl-header"><div><div class="tl-role">Civil Engineer</div><div class="tl-company">Techno Engineering Services (TES) · Islamabad</div></div><span class="tl-period">Oct 2022 – Jul 2023</span></div><ul class="tl-list"><li>Conducted research and site investigations for project planning</li><li>Evaluated project risks, materials, and costs</li><li>Supervised project delivery and monitored progress</li><li>Prepared status reports and documentation</li></ul></div>
+    <div class="tl-item reveal reveal-delay-3"><div class="tl-dot"></div><div class="tl-header"><div><div class="tl-role">Intern Engineer</div><div class="tl-company">Designmen Consulting Engineering Pvt. Ltd · Islamabad</div></div><span class="tl-period">Jan 2022 – Sep 2022</span></div><ul class="tl-list"><li>Designed building prototype models using ETABS (Structural Department)</li><li>Prepared project cost estimates, schedules, and specifications</li><li>Inspected completed civil works and documented findings</li><li>Tested sites and materials for strength and quality</li></ul></div>
+    <div class="tl-item reveal reveal-delay-4"><div class="tl-dot"></div><div class="tl-header"><div><div class="tl-role">Junior Site Engineer</div><div class="tl-company">Thaheem Construction Company · Lahore</div></div><span class="tl-period">Jul 2021 – Dec 2021</span></div><ul class="tl-list"><li>Attended coordination meetings with clients and consultants</li><li>Conducted daily briefings with site team leaders</li><li>Assisted in planning and sequencing construction operations</li><li>Coordinated handover of completed works to the client</li></ul></div>
+    <div class="tl-item reveal reveal-delay-5"><div class="tl-dot"></div><div class="tl-header"><div><div class="tl-role">Trainee Engineer</div><div class="tl-company">Ahmed Construction Company · Lahore</div></div><span class="tl-period">Jan 2021 – Jun 2021</span></div><ul class="tl-list"><li>Assisted senior engineers with daily site operations</li><li>Helped prepare project documentation including submittals, RFIs, and as-built drawings</li><li>Gained hands-on experience in construction methods and quality control</li><li>Acquired practical skills in surveying and setting out</li></ul></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal"><span class="section-eyebrow">Expertise</span><h2 class="section-title">Technical & Professional Skills</h2><div class="section-line"></div></div>
+  <div class="skills-wrap">
+    <div class="reveal">
+      <div class="skill-group-title">Software & Tools</div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">AutoCAD</span><span class="skill-pct">92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">ETABS (Structural Analysis)</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">PlanSwift (Estimation)</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Primavera P6 (Scheduling)</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">MS Office (Word, Excel, PowerPoint)</span><span class="skill-pct">95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="skill-group-title">Core Competencies</div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Quality Control & Assurance</span><span class="skill-pct">95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Site Supervision & Monitoring</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Material Testing & Reporting</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Estimation & Quantity Take-off</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+      <div class="skill-row"><div class="skill-top"><span class="skill-name">Risk Assessment</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
+      <div class="skill-group-title" style="margin-top:2rem;">Soft Skills</div>
+      <div class="soft-skills"><span class="soft-tag">Team Leadership</span><span class="soft-tag">Problem Solving</span><span class="soft-tag">Project Coordination</span><span class="soft-tag">Documentation</span><span class="soft-tag">Communication</span><span class="soft-tag">Attention to Detail</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-header reveal"><span class="section-eyebrow">Portfolio</span><h2 class="section-title">Featured Projects</h2><div class="section-line"></div></div>
+  <div class="projects-grid">
+    <div class="project-card reveal"><div class="project-img-wrap"><img class="project-img" src="images/WhatsApp Image 2026-06-06 at 8.34.41 PM - Copy.jpeg" alt="Residential Complex"/><span class="project-tag">Residential</span><div class="project-overlay"><span style="font-size:2rem;">🏗️</span></div></div><div class="project-info"><h3>made an house</h3><p>Supervised the construction of a G+7 residential building in Islamabad. Responsibilities included QA/QC inspection at every stage, material testing, and NCR management to ensure full compliance with engineering specifications.</p><div class="project-meta"><span>📍 Islamabad</span><span>🏢 Residential</span><span>📅 2023–2024</span></div></div></div>
+    <div class="project-card reveal reveal-delay-2"><div class="project-img-wrap"><img class="project-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Commercial Block"/><span class="project-tag">Commercial</span><div class="project-overlay"><span style="font-size:2rem;">🏢</span></div></div><div class="project-info"><h3>Commercial Office Block Development</h3><p>Worked as site civil engineer overseeing the structural and finishing works of a commercial office block. Conducted daily briefings, coordinated with consultants, and ensured smooth handover of completed works to the client on schedule.</p><div class="project-meta"><span>📍 Lahore</span><span>🏢 Commercial</span><span>📅 2021–2022</span></div></div></div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal"><span class="section-eyebrow">Credentials</span><h2 class="section-title">Education & Certifications</h2><div class="section-line"></div></div>
+  <div class="edu-certs-grid">
+    <div class="reveal">
+      <div class="edu-block-title">Academic Background</div>
+      <div class="edu-card"><div class="edu-year">2016 – 2020</div><h4>BSc Civil Engineering</h4><p>Lahore Leads University, Lahore, Pakistan</p></div>
+      <div class="edu-card"><div class="edu-year">Pre-Engineering</div><h4>FSc Pre-Engineering</h4><p>502 Model College, Rawalpindi</p></div>
+      <div class="edu-card"><div class="edu-year">Matriculation</div><h4>Secondary School Certificate</h4><p>502 Model College, Rawalpindi</p></div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="edu-block-title">Experience Letters & Credentials</div>
+      <ul class="cert-list">
+        <li class="cert-item"><span class="cert-icon">📜</span><div><strong>Experience Certificate – QA/QC Civil Engineer</strong><span>Ms Noor Ud Din Construction Company · PEC Lic. No. 78398 · Nov 2024–Present</span></div></li>
+        <li class="cert-item"><span class="cert-icon">📜</span><div><strong>Experience Certificate – Site Civil Engineer</strong><span>Mirza Areeb Constructions SMC Pvt. Ltd · Aug 2023 – Sep 2024</span></div></li>
+        <li class="cert-item"><span class="cert-icon">📜</span><div><strong>Experience Certificate – Civil Engineer</strong><span>Techno Engineering Services (Pvt.) Ltd · Oct 2022 – Jul 2023</span></div></li>
+        <li class="cert-item"><span class="cert-icon">📜</span><div><strong>Internship Certificate – Structural Department</strong><span>Designmen Consulting Engineers Pvt. Ltd · Jun–Sep 2022</span></div></li>
+        <li class="cert-item"><span class="cert-icon">🎓</span><div><strong>BSc Civil Engineering Degree</strong><span>Lahore Leads University · Issued 10 March 2022</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTS (Backend-powered) -->
+<section class="documents" id="documents">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">Verified Documents</span>
+    <h2 class="section-title">Professional Documents</h2>
+    <div class="section-line"></div>
+  </div>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:2rem;" class="reveal">
+    All documents are served securely from the server. Click <strong style="color:var(--accent)">View</strong> to preview or <strong style="color:var(--accent)">Download</strong> to save.
+  </p>
+  <div class="docs-grid reveal" id="docsGrid">
+    <p class="docs-loading">⏳ Loading documents…</p>
+  </div>
+</section>
+
+<!-- LANGUAGES & HOBBIES -->
+<section class="extra" id="extra">
+  <div class="extra-grid">
+    <div class="reveal">
+      <div class="section-header"><span class="section-eyebrow">Communication</span><h2 class="section-title" style="font-size:1.8rem;">Languages</h2><div class="section-line"></div></div>
+      <div class="lang-list" style="margin-top:1.5rem;">
+        <div class="lang-item"><span class="lang-name">English</span><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div></div></div>
+        <div class="lang-item"><span class="lang-name">Urdu</span><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+        <div class="lang-item"><span class="lang-name">Punjabi</span><div class="lang-dots"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="section-header"><span class="section-eyebrow">Personal</span><h2 class="section-title" style="font-size:1.8rem;">Hobbies & Interests</h2><div class="section-line"></div></div>
+      <div class="hobby-tags" style="margin-top:1.5rem;">
+        <span class="hobby-tag">📚 Reading Engineering Articles</span>
+        <span class="hobby-tag">⚽ Fitness & Sports</span>
+        <span class="hobby-tag">✈️ Traveling</span>
+        <span class="hobby-tag">🧩 Problem-Solving Activities</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header reveal"><span class="section-eyebrow">Get In Touch</span><h2 class="section-title">Let's Work Together</h2><div class="section-line"></div></div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <p>Whether you have a construction project, need a QA/QC engineer on site I'd love to hear from you.</p>
+      <div class="contact-items">
+        <div class="contact-item"><div class="c-icon">📍</div><div><div class="c-label">Location</div><div class="c-value"><span>Rawalpindi, Pakistan</span></div></div></div>
+        <!-- ← tel: link — tap on mobile to call directly -->
+        <div class="contact-item"><div class="c-icon">📞</div><div><div class="c-label">Phone</div><div class="c-value"><a href="tel:+923030157596">+92 303 0157596</a></div></div></div>
+        <!-- ← mailto: link — opens email client -->
+        <div class="contact-item"><div class="c-icon">📧</div><div><div class="c-label">Email</div><div class="c-value"><a href="mailto:engr.kamranali810@gmail.com">engr.kamranali810@gmail.com</a></div></div></div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="contact-form">
+        <div class="form-row">
+          <input type="text"  id="cf-name"    placeholder="Your Name"/>
+          <input type="email" id="cf-email"   placeholder="Email Address"/>
+        </div>
+        <input  type="text"   id="cf-subject" placeholder="Subject / Project Type"/>
+        <textarea             id="cf-message" placeholder="Tell me about your project or opportunity…"></textarea>
+        <button type="button" onclick="submitForm()">Send Message ▶</button>
+        <div class="form-status" id="formStatus"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Kamran Ali. All rights reserved.</p>
+  <div class="footer-logo">Kamran<span>.</span></div>
+  <p>Rawalpindi, Pakistan · engr.kamranali810@gmail.com</p>
+</footer>
+
+<script>
+  /* ── Custom cursor ── */
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function animateCursor(){
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animateCursor);
+  })();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ ring.style.width='54px'; ring.style.height='54px'; cursor.style.opacity='0'; });
+    el.addEventListener('mouseleave',()=>{ ring.style.width='36px'; ring.style.height='36px'; cursor.style.opacity='1'; });
+  });
+
+  /* ── Scroll reveal ── */
+  const io = new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }),{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ── Skill bars ── */
+  const skillObs = new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.width+'%'); }),{threshold:0.3});
+  document.querySelectorAll('.skills-wrap').forEach(w=>skillObs.observe(w));
+
+  /* ── Scroll-to-top ── */
+  const st = document.getElementById('scrollTop');
+  window.addEventListener('scroll',()=>st.classList.toggle('visible',window.scrollY>400));
+
+  /* ── Stat counters (fire on load) ── */
+  function runCounters(){
+    document.querySelectorAll('.hero-stats .stat-num').forEach(el=>{
+      const raw=el.textContent.trim(), final=parseInt(raw), suffix=raw.replace(/[0-9]/g,'');
+      if(isNaN(final)) return;
+      let cur=0; const step=Math.max(1,Math.ceil(final/40));
+      el.textContent='0'+suffix;
+      const t=setInterval(()=>{ cur+=step; if(cur>=final){cur=final;clearInterval(t);} el.textContent=cur+suffix; },40);
+    });
+  }
+  window.addEventListener('load',()=>setTimeout(runCounters,1000));
+
+  /* ══════════════════════════════════════════════════════════
+     BACKEND INTEGRATION
+     All fetch() calls go to the Node.js server (server.js).
+     If you open the HTML directly (file://) these calls will
+     fail gracefully — run the server first with: node server.js
+  ══════════════════════════════════════════════════════════ */
+
+  /* ── Load documents (Works with Node.js & Netlify static hosting) ── */
+  const fallbackDocs = [
+    {
+      id: 1,
+      name: 'Kamran Ali CV',
+      type: 'PDF',
+      url: 'documents/Kamran Ali_CV.pdf',
+      downloadUrl: 'documents/Kamran Ali_CV.pdf'
+    },
+    {
+      id: 2,
+      name: 'Kamran Ali Experience Letter',
+      type: 'PDF',
+      url: 'documents/Kamran Ali_ experiences later.pdf',
+      downloadUrl: 'documents/Kamran Ali_ experiences later.pdf'
+    }
+  ];
+
+  function renderDocs(documents) {
+    const grid = document.getElementById('docsGrid');
+    if (!documents || documents.length === 0) {
+      grid.innerHTML = '<p class="docs-empty">📂 No documents found.</p>';
+      return;
+    }
+
+    grid.innerHTML = documents.map(doc => `
+      <div class="doc-card">
+        <div class="doc-icon">${doc.type === 'PDF' ? '📄' : '🖼️'}</div>
+        <div class="doc-type">${doc.type}</div>
+        <div class="doc-name">${doc.name}</div>
+        <div class="doc-actions">
+          <button class="doc-btn doc-btn-view" onclick="viewDoc('${doc.url}','${doc.name.replace(/'/g, "\\'")}','${doc.type}')">View</button>
+          <a class="doc-btn doc-btn-download" href="${doc.downloadUrl}" download>Download</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function loadDocuments(){
+    try {
+      const res = await fetch('/api/documents');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.documents) && data.documents.length > 0) {
+          renderDocs(data.documents);
+          return;
+        }
+      }
+    } catch(err) {
+      // In static deployment (Netlify), fetch fails or 404s
+    }
+    // Fallback to static bundled documents
+    renderDocs(fallbackDocs);
+  }
+  loadDocuments();
+
+  /* ── Document viewer modal ── */
+  function viewDoc(url, name, type){
+    document.getElementById('modalTitle').textContent = name;
+    const body = document.getElementById('modalBody');
+    if(type === 'PDF'){
+      body.innerHTML = `<iframe src="${url}" title="${name}"></iframe>`;
+    } else {
+      body.innerHTML = `<img class="doc-preview" src="${url}" alt="${name}"/>`;
+    }
+    document.getElementById('docModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    document.getElementById('docModal').classList.remove('open');
+    document.getElementById('modalBody').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+  document.getElementById('docModal').addEventListener('click', e => { if(e.target === e.currentTarget) closeModal(); });
+
+  /* ── Contact form → POST /api/contact/send (with email client fallback for Netlify) ── */
+  async function submitForm(){
+    const status  = document.getElementById('formStatus');
+    const payload = {
+      name:    document.getElementById('cf-name').value.trim(),
+      email:   document.getElementById('cf-email').value.trim(),
+      subject: document.getElementById('cf-subject').value.trim(),
+      message: document.getElementById('cf-message').value.trim(),
+    };
+    status.className = 'form-status';
+    if(!payload.name || !payload.email || !payload.message){
+      status.textContent = '⚠️ Please fill in your name, email, and message.';
+      status.classList.add('error'); return;
+    }
+    try {
+      const res = await fetch('/api/contact/send', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+      if (res.ok) {
+        const data = await res.json();
+        if(data.success){
+          status.textContent = '✅ ' + data.message;
+          status.classList.add('success');
+          ['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');
+          return;
+        }
+      }
+      throw new Error('API not available');
+    } catch {
+      // Fallback for Netlify / static hosting: open direct email client
+      const mailtoUrl = `mailto:engr.kamranali810@gmail.com?subject=${encodeURIComponent(payload.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent('From: ' + payload.name + ' (' + payload.email + ')\n\n' + payload.message)}`;
+      window.location.href = mailtoUrl;
+      status.textContent = '✅ Opening your email client to contact engr.kamranali810@gmail.com...';
+      status.classList.add('success');
+    }
+  }
+</script>
+</body>
+</html>

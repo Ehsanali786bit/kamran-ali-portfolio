@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etholinc — Pro Theme Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --page-bg: #0C0C0F;
+  --page-text: #fff;
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+  background: var(--page-bg);
+  color: var(--page-text);
+  min-height: 100vh;
+  padding: 48px 24px 64px;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.header-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 14px;
+}
+.header h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+}
+.header h1 em {
+  font-style: italic;
+  color: #C8A97E;
+}
+.header p {
+  font-size: 14px;
+  color: #555;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-label::before, .section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #1E1E24;
+}
+.section-label span {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #444;
+  white-space: nowrap;
+}
+
+/* ── THEME WRAPPER ── */
+.theme-wrapper {
+  max-width: 1160px;
+  margin: 0 auto 80px;
+}
+
+/* ── PHONE FRAME ── */
+.phone-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.phone-frame {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease;
+}
+.phone-frame:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Dynamic island notch */
+.notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 26px;
+  border-radius: 20px;
+  z-index: 10;
+}
+
+.phone-screen {
+  padding: 60px 20px 28px;
+  min-height: 580px;
+  position: relative;
+}
+
+/* ── SCREEN ELEMENTS ── */
+.sc-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.sc-logo {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+}
+.sc-icons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.sc-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.sc-greeting {
+  margin-bottom: 20px;
+}
+.sc-greeting-sub {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.sc-greeting-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 22px;
+  letter-spacing: -0.3px;
+}
+
+/* Stats */
+.sc-stats {
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+.sc-stat-item { text-align: center; }
+.sc-stat-val {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 2px;
+}
+.sc-stat-lbl {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* Campaign cards */
+.sc-section-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.sc-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.sc-see-all {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sc-campaign {
+  border-radius: 14px;
+  padding: 13px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.sc-camp-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.sc-camp-name {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.sc-camp-sub {
+  font-size: 10px;
+  font-weight: 400;
+}
+.sc-camp-tag {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 100px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.sc-cta {
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Bottom nav */
+.sc-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 14px 10px 4px;
+  margin-top: 14px;
+}
+.sc-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.sc-nav-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+.sc-nav-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+/* ── PALETTE BAR ── */
+.palette-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+}
+.pb-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+}
+.pb-name {
+  font-size: 12px;
+  font-weight: 600;
+  flex: 1;
+}
+.pb-hex {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ── COLOUR CHIPS ── */
+.chips-row {
+  display: flex;
+  gap: 6px;
+  padding: 0 20px 16px;
+  flex-wrap: wrap;
+}
+.chip {
+  height: 6px;
+  flex: 1;
+  border-radius: 100px;
+  min-width: 20px;
+}
+
+/* ── VARIANT TAG ── */
+.variant-tag {
+  position: absolute;
+  top: 18px;
+  right: -1px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px 5px 10px;
+  border-radius: 6px 0 0 6px;
+  z-index: 20;
+}
+
+/* ── DESCRIPTION ── */
+.theme-desc {
+  max-width: 1160px;
+  margin: 32px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.desc-card {
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #1A1A22;
+}
+.desc-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 8px;
+}
+.desc-card-body {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.6;
+}
+.desc-card-body strong { color: #bbb; font-weight: 600; }
+
+/* Spacer */
+.spacer { height: 16px; }
+
+@media (max-width: 640px) {
+  .phone-row { grid-template-columns: 1fr; }
+  .theme-desc { grid-template-columns: 1fr; }
+}
+
+/* Entrance animation */
+.phone-frame {
+  animation: rise 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+.phone-frame:nth-child(2) { animation-delay: 0.1s; }
+.phone-frame:nth-child(3) { animation-delay: 0.2s; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">Etholinc · Theme System</div>
+  <h1>Two modes.<br><em>One identity.</em></h1>
+  <p>Designed by a professional lens — cream & ink for light, near-black & arctic blue for dark.</p>
+</div>
+
+<!-- ════════════════════════════════
+     LIGHT MODE — CREAM + NAVY/BLUE
+     ════════════════════════════════ -->
+<div class="theme-wrapper">
+  <div class="section-label"><span>Light Mode · Cream & Ink</span></div>
+
+  <div class="phone-row">
+
+    <!-- VARIANT A: Warm Cream + Deep Navy -->
+    <div class="phone-frame" style="box-shadow: 0 32px 80px rgba(200,169,126,0.12), 0 2px 0 #2a2010; background:#F5EFE4;">
+      <div class="notch" style="background:#1A1208;"></div>
+      <div class="variant-tag" style="background:#1C1A14; color:#C8A97E;">A · Warm</div>
+
+      <div class="phone-screen" style="background:#F5EFE4;">
+        <div class="sc-topbar">
+          <div class="sc-logo" style="color:#1C1A14;">Etholinc</div>
+          <div class="sc-icons">
+            <div class="sc-icon-btn" style="background:#EDE5D5; color:#1C1A14;">🔔</div>
+            <div class="sc-icon-btn" style="background:#1C3A6B; color:#fff; border-radius:50%;">E</div>
+          </div>
+        </div>
+
+        <div class="sc-greeting">
+          <div class="sc-greeting-sub" style="color:#9C8E7A;">Good morning</div>
+          <div class="sc-greeting-name" style="color:#1C1A14;">Ehsan Ahmad</div>
+        </div>
+
+        <div class="sc-stats" style="background:#1C3A6B;">
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">12</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.5);">Active</span>
+          </div>
+          <div class="sc-stat-item" style="border-left:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1);">
+            <span class="sc-stat-val" style="color:#C8A97E;">$840</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.5);">Earned</span>
+          </div>
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">5</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.5);">Applied</span>
+          </div>
+        </div>
+
+        <div class="sc-section-hdr">
+          <span class="sc-section-title" style="color:#1C1A14;">Campaigns</span>
+          <span class="sc-see-all" style="color:#1C3A6B;">See all</span>
+        </div>
+
+        <div class="sc-campaign" style="background:#EDE5D5;">
+          <div class="sc-camp-dot" style="background:#1C3A6B;">👟</div>
+          <div>
+            <div class="sc-camp-name" style="color:#1C1A14;">Nike Summer Drop</div>
+            <div class="sc-camp-sub" style="color:#9C8E7A;">$500 · Fashion</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#1C3A6B; color:#fff;">Open</div>
+        </div>
+
+        <div class="sc-campaign" style="background:#EDE5D5;">
+          <div class="sc-camp-dot" style="background:#C8A97E22;">✨</div>
+          <div>
+            <div class="sc-camp-name" style="color:#1C1A14;">Zara Collab</div>
+            <div class="sc-camp-sub" style="color:#9C8E7A;">$300 · Lifestyle</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#C8A97E22; color:#8B6914;">New</div>
+        </div>
+
+        <div class="sc-cta" style="background:#1C3A6B; color:#fff;">Browse All Campaigns</div>
+
+        <div class="sc-nav" style="border-top:1px solid #DDD4C2; margin-top:14px;">
+          <div class="sc-nav-item" style="color:#1C3A6B;">
+            <span class="sc-nav-icon">⚡</span>
+            <div class="sc-nav-dot" style="background:#1C3A6B;"></div>
+          </div>
+          <div class="sc-nav-item" style="color:#9C8E7A;"><span class="sc-nav-icon">🔍</span></div>
+          <div class="sc-nav-item" style="color:#9C8E7A;"><span class="sc-nav-icon">💬</span></div>
+          <div class="sc-nav-item" style="color:#9C8E7A;"><span class="sc-nav-icon">👤</span></div>
+        </div>
+      </div>
+
+      <div class="palette-bar" style="background:#EDE5D5; border-top:1px solid #DDD4C2;">
+        <div class="pb-swatch" style="background:#F5EFE4; border:1px solid #DDD4C2;"></div>
+        <div class="pb-swatch" style="background:#1C3A6B;"></div>
+        <div class="pb-swatch" style="background:#C8A97E;"></div>
+        <div class="pb-swatch" style="background:#1C1A14;"></div>
+        <span class="pb-name" style="color:#1C1A14;">Warm Cream</span>
+        <span class="pb-hex" style="color:#9C8E7A;">#F5EFE4</span>
+      </div>
+      <div class="chips-row" style="background:#EDE5D5;">
+        <div class="chip" style="background:#F5EFE4; border:1px solid #DDD4C2;"></div>
+        <div class="chip" style="background:#EDE5D5;"></div>
+        <div class="chip" style="background:#1C3A6B; flex:2;"></div>
+        <div class="chip" style="background:#C8A97E;"></div>
+        <div class="chip" style="background:#1C1A14;"></div>
+      </div>
+    </div>
+
+    <!-- VARIANT B: Cool Cream + Electric Blue -->
+    <div class="phone-frame" style="box-shadow: 0 32px 80px rgba(37,99,235,0.15), 0 2px 0 #1a2035; background:#F7F5F0;">
+      <div class="notch" style="background:#0F172A;"></div>
+      <div class="variant-tag" style="background:#1E3A5F; color:#93C5FD;">B · Cool</div>
+
+      <div class="phone-screen" style="background:#F7F5F0;">
+        <div class="sc-topbar">
+          <div class="sc-logo" style="color:#0F172A;">Etholinc</div>
+          <div class="sc-icons">
+            <div class="sc-icon-btn" style="background:#EBE9E3; color:#0F172A;">🔔</div>
+            <div class="sc-icon-btn" style="background:#2563EB; color:#fff; border-radius:50%;">E</div>
+          </div>
+        </div>
+
+        <div class="sc-greeting">
+          <div class="sc-greeting-sub" style="color:#94A3B8;">Good morning</div>
+          <div class="sc-greeting-name" style="color:#0F172A;">Ehsan Ahmad</div>
+        </div>
+
+        <div class="sc-stats" style="background:#0F172A;">
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">12</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.4);">Active</span>
+          </div>
+          <div class="sc-stat-item" style="border-left:1px solid rgba(255,255,255,0.08); border-right:1px solid rgba(255,255,255,0.08);">
+            <span class="sc-stat-val" style="color:#60A5FA;">$840</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.4);">Earned</span>
+          </div>
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">5</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.4);">Applied</span>
+          </div>
+        </div>
+
+        <div class="sc-section-hdr">
+          <span class="sc-section-title" style="color:#0F172A;">Campaigns</span>
+          <span class="sc-see-all" style="color:#2563EB;">See all</span>
+        </div>
+
+        <div class="sc-campaign" style="background:#EBE9E3;">
+          <div class="sc-camp-dot" style="background:#2563EB;">👟</div>
+          <div>
+            <div class="sc-camp-name" style="color:#0F172A;">Nike Summer Drop</div>
+            <div class="sc-camp-sub" style="color:#94A3B8;">$500 · Fashion</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#2563EB; color:#fff;">Open</div>
+        </div>
+
+        <div class="sc-campaign" style="background:#EBE9E3;">
+          <div class="sc-camp-dot" style="background:#DBEAFE;">✨</div>
+          <div>
+            <div class="sc-camp-name" style="color:#0F172A;">Zara Collab</div>
+            <div class="sc-camp-sub" style="color:#94A3B8;">$300 · Lifestyle</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#DBEAFE; color:#1D4ED8;">New</div>
+        </div>
+
+        <div class="sc-cta" style="background:#2563EB; color:#fff;">Browse All Campaigns</div>
+
+        <div class="sc-nav" style="border-top:1px solid #DDD9CE; margin-top:14px;">
+          <div class="sc-nav-item" style="color:#2563EB;">
+            <span class="sc-nav-icon">⚡</span>
+            <div class="sc-nav-dot" style="background:#2563EB;"></div>
+          </div>
+          <div class="sc-nav-item" style="color:#94A3B8;"><span class="sc-nav-icon">🔍</span></div>
+          <div class="sc-nav-item" style="color:#94A3B8;"><span class="sc-nav-icon">💬</span></div>
+          <div class="sc-nav-item" style="color:#94A3B8;"><span class="sc-nav-icon">👤</span></div>
+        </div>
+      </div>
+
+      <div class="palette-bar" style="background:#EBE9E3; border-top:1px solid #DDD9CE;">
+        <div class="pb-swatch" style="background:#F7F5F0; border:1px solid #DDD9CE;"></div>
+        <div class="pb-swatch" style="background:#0F172A;"></div>
+        <div class="pb-swatch" style="background:#2563EB;"></div>
+        <div class="pb-swatch" style="background:#60A5FA;"></div>
+        <span class="pb-name" style="color:#0F172A;">Cool Cream</span>
+        <span class="pb-hex" style="color:#94A3B8;">#F7F5F0</span>
+      </div>
+      <div class="chips-row" style="background:#EBE9E3;">
+        <div class="chip" style="background:#F7F5F0; border:1px solid #DDD9CE;"></div>
+        <div class="chip" style="background:#EBE9E3;"></div>
+        <div class="chip" style="background:#0F172A; flex:1.5;"></div>
+        <div class="chip" style="background:#2563EB; flex:2;"></div>
+        <div class="chip" style="background:#60A5FA;"></div>
+      </div>
+    </div>
+
+    <!-- VARIANT C: Ivory + Cobalt (bold) -->
+    <div class="phone-frame" style="box-shadow: 0 32px 80px rgba(79,70,229,0.18), 0 2px 0 #1a1a2e; background:#FDFBF7;">
+      <div class="notch" style="background:#0D0D1A;"></div>
+      <div class="variant-tag" style="background:#312E81; color:#A5B4FC;">C · Bold</div>
+
+      <div class="phone-screen" style="background:#FDFBF7;">
+        <div class="sc-topbar">
+          <div class="sc-logo" style="color:#0D0D1A;">Etholinc</div>
+          <div class="sc-icons">
+            <div class="sc-icon-btn" style="background:#F0EDE6; color:#0D0D1A;">🔔</div>
+            <div class="sc-icon-btn" style="background:#4338CA; color:#fff; border-radius:50%;">E</div>
+          </div>
+        </div>
+
+        <div class="sc-greeting">
+          <div class="sc-greeting-sub" style="color:#9CA3AF;">Good morning</div>
+          <div class="sc-greeting-name" style="color:#0D0D1A;">Ehsan Ahmad</div>
+        </div>
+
+        <div class="sc-stats" style="background: linear-gradient(135deg, #312E81 0%, #4338CA 100%);">
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">12</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.45);">Active</span>
+          </div>
+          <div class="sc-stat-item" style="border-left:1px solid rgba(255,255,255,0.1); border-right:1px solid rgba(255,255,255,0.1);">
+            <span class="sc-stat-val" style="color:#C7D2FE;">$840</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.45);">Earned</span>
+          </div>
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">5</span>
+            <span class="sc-stat-lbl" style="color:rgba(255,255,255,0.45);">Applied</span>
+          </div>
+        </div>
+
+        <div class="sc-section-hdr">
+          <span class="sc-section-title" style="color:#0D0D1A;">Campaigns</span>
+          <span class="sc-see-all" style="color:#4338CA;">See all</span>
+        </div>
+
+        <div class="sc-campaign" style="background:#F0EDE6;">
+          <div class="sc-camp-dot" style="background:#4338CA;">👟</div>
+          <div>
+            <div class="sc-camp-name" style="color:#0D0D1A;">Nike Summer Drop</div>
+            <div class="sc-camp-sub" style="color:#9CA3AF;">$500 · Fashion</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#4338CA; color:#fff;">Open</div>
+        </div>
+
+        <div class="sc-campaign" style="background:#F0EDE6;">
+          <div class="sc-camp-dot" style="background:#EEF2FF;">✨</div>
+          <div>
+            <div class="sc-camp-name" style="color:#0D0D1A;">Zara Collab</div>
+            <div class="sc-camp-sub" style="color:#9CA3AF;">$300 · Lifestyle</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#EEF2FF; color:#4338CA;">New</div>
+        </div>
+
+        <div class="sc-cta" style="background:#4338CA; color:#fff;">Browse All Campaigns</div>
+
+        <div class="sc-nav" style="border-top:1px solid #E8E4DA; margin-top:14px;">
+          <div class="sc-nav-item" style="color:#4338CA;">
+            <span class="sc-nav-icon">⚡</span>
+            <div class="sc-nav-dot" style="background:#4338CA;"></div>
+          </div>
+          <div class="sc-nav-item" style="color:#9CA3AF;"><span class="sc-nav-icon">🔍</span></div>
+          <div class="sc-nav-item" style="color:#9CA3AF;"><span class="sc-nav-icon">💬</span></div>
+          <div class="sc-nav-item" style="color:#9CA3AF;"><span class="sc-nav-icon">👤</span></div>
+        </div>
+      </div>
+
+      <div class="palette-bar" style="background:#F0EDE6; border-top:1px solid #E8E4DA;">
+        <div class="pb-swatch" style="background:#FDFBF7; border:1px solid #E8E4DA;"></div>
+        <div class="pb-swatch" style="background:#312E81;"></div>
+        <div class="pb-swatch" style="background:#4338CA;"></div>
+        <div class="pb-swatch" style="background:#C7D2FE;"></div>
+        <span class="pb-name" style="color:#0D0D1A;">Ivory + Cobalt</span>
+        <span class="pb-hex" style="color:#9CA3AF;">#FDFBF7</span>
+      </div>
+      <div class="chips-row" style="background:#F0EDE6;">
+        <div class="chip" style="background:#FDFBF7; border:1px solid #E8E4DA;"></div>
+        <div class="chip" style="background:#F0EDE6;"></div>
+        <div class="chip" style="background:#312E81;"></div>
+        <div class="chip" style="background:#4338CA; flex:2;"></div>
+        <div class="chip" style="background:#C7D2FE;"></div>
+      </div>
+    </div>
+
+  </div><!-- /phone-row -->
+
+  <div class="theme-desc">
+    <div class="desc-card">
+      <div class="desc-card-title">A · Warm Cream</div>
+      <div class="desc-card-body">
+        <strong>#F5EFE4</strong> base with <strong>deep navy #1C3A6B</strong> and a gold accent <strong>#C8A97E</strong>. Feels like a premium editorial magazine. Warm, confident, trustworthy. Best for brands targeting luxury or lifestyle segments.
+      </div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-card-title">B · Cool Cream</div>
+      <div class="desc-card-body">
+        <strong>#F7F5F0</strong> base with <strong>slate-black #0F172A</strong> and <strong>electric blue #2563EB</strong>. Closest to Notion/Linear energy. Clean, modern, tech-forward. Best overall balance of professional + approachable.
+      </div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-card-title">C · Ivory + Cobalt</div>
+      <div class="desc-card-body">
+        <strong>#FDFBF7</strong> ivory with <strong>cobalt indigo #4338CA</strong>. Keeps a hint of your original purple identity but grounded in light. Bold stat cards use a gradient. Most distinctive of the three.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     DARK MODE — NEAR-BLACK + BLUE
+     ════════════════════════════════ -->
+<div class="theme-wrapper">
+  <div class="section-label"><span>Dark Mode · Arctic Night</span></div>
+
+  <div class="phone-row">
+
+    <!-- DARK A: Near-black + Arctic Blue -->
+    <div class="phone-frame" style="box-shadow: 0 32px 80px rgba(56,189,248,0.1), 0 1px 0 #1a2535; background:#090E18;">
+      <div class="notch" style="background:#000;"></div>
+      <div class="variant-tag" style="background:#0EA5E9; color:#fff;">D · Arctic</div>
+
+      <div class="phone-screen" style="background:#090E18;">
+        <div class="sc-topbar">
+          <div class="sc-logo" style="color:#F0F4FF;">Etholinc</div>
+          <div class="sc-icons">
+            <div class="sc-icon-btn" style="background:#0F1929; color:#94A3B8;">🔔</div>
+            <div class="sc-icon-btn" style="background:#0EA5E9; color:#fff; border-radius:50%;">E</div>
+          </div>
+        </div>
+
+        <div class="sc-greeting">
+          <div class="sc-greeting-sub" style="color:#334155;">Good morning</div>
+          <div class="sc-greeting-name" style="color:#F0F4FF;">Ehsan Ahmad</div>
+        </div>
+
+        <div class="sc-stats" style="background:#0F1929; border:1px solid #1E2D45;">
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#F0F4FF;">12</span>
+            <span class="sc-stat-lbl" style="color:#334155;">Active</span>
+          </div>
+          <div class="sc-stat-item" style="border-left:1px solid #1E2D45; border-right:1px solid #1E2D45;">
+            <span class="sc-stat-val" style="color:#38BDF8;">$840</span>
+            <span class="sc-stat-lbl" style="color:#334155;">Earned</span>
+          </div>
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#F0F4FF;">5</span>
+            <span class="sc-stat-lbl" style="color:#334155;">Applied</span>
+          </div>
+        </div>
+
+        <div class="sc-section-hdr">
+          <span class="sc-section-title" style="color:#CBD5E1;">Campaigns</span>
+          <span class="sc-see-all" style="color:#0EA5E9;">See all</span>
+        </div>
+
+        <div class="sc-campaign" style="background:#0F1929; border:1px solid #1E2D45;">
+          <div class="sc-camp-dot" style="background:#0EA5E920;">👟</div>
+          <div>
+            <div class="sc-camp-name" style="color:#F0F4FF;">Nike Summer Drop</div>
+            <div class="sc-camp-sub" style="color:#475569;">$500 · Fashion</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#0EA5E920; color:#38BDF8;">Open</div>
+        </div>
+
+        <div class="sc-campaign" style="background:#0F1929; border:1px solid #1E2D45;">
+          <div class="sc-camp-dot" style="background:#1E2D45;">✨</div>
+          <div>
+            <div class="sc-camp-name" style="color:#F0F4FF;">Zara Collab</div>
+            <div class="sc-camp-sub" style="color:#475569;">$300 · Lifestyle</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#1E2D45; color:#94A3B8;">New</div>
+        </div>
+
+        <div class="sc-cta" style="background:#0EA5E9; color:#fff;">Browse All Campaigns</div>
+
+        <div class="sc-nav" style="border-top:1px solid #1E2D45; margin-top:14px;">
+          <div class="sc-nav-item" style="color:#0EA5E9;">
+            <span class="sc-nav-icon">⚡</span>
+            <div class="sc-nav-dot" style="background:#0EA5E9;"></div>
+          </div>
+          <div class="sc-nav-item" style="color:#334155;"><span class="sc-nav-icon">🔍</span></div>
+          <div class="sc-nav-item" style="color:#334155;"><span class="sc-nav-icon">💬</span></div>
+          <div class="sc-nav-item" style="color:#334155;"><span class="sc-nav-icon">👤</span></div>
+        </div>
+      </div>
+
+      <div class="palette-bar" style="background:#0A1220; border-top:1px solid #1E2D45;">
+        <div class="pb-swatch" style="background:#090E18;"></div>
+        <div class="pb-swatch" style="background:#0F1929;"></div>
+        <div class="pb-swatch" style="background:#0EA5E9;"></div>
+        <div class="pb-swatch" style="background:#38BDF8;"></div>
+        <span class="pb-name" style="color:#CBD5E1;">Arctic Night</span>
+        <span class="pb-hex" style="color:#334155;">#090E18</span>
+      </div>
+      <div class="chips-row" style="background:#0A1220;">
+        <div class="chip" style="background:#090E18;"></div>
+        <div class="chip" style="background:#0F1929; flex:1.5;"></div>
+        <div class="chip" style="background:#1E2D45;"></div>
+        <div class="chip" style="background:#0EA5E9; flex:2;"></div>
+        <div class="chip" style="background:#38BDF8;"></div>
+      </div>
+    </div>
+
+    <!-- DARK B: Near-black + Sapphire -->
+    <div class="phone-frame" style="box-shadow: 0 32px 80px rgba(37,99,235,0.14), 0 1px 0 #101828; background:#070B14;">
+      <div class="notch" style="background:#000;"></div>
+      <div class="variant-tag" style="background:#2563EB; color:#fff;">E · Sapphire</div>
+
+      <div class="phone-screen" style="background:#070B14;">
+        <div class="sc-topbar">
+          <div class="sc-logo" style="color:#EFF6FF;">Etholinc</div>
+          <div class="sc-icons">
+            <div class="sc-icon-btn" style="background:#0D1526; color:#64748B;">🔔</div>
+            <div class="sc-icon-btn" style="background:#2563EB; color:#fff; border-radius:50%;">E</div>
+          </div>
+        </div>
+
+        <div class="sc-greeting">
+          <div class="sc-greeting-sub" style="color:#1E3A5F;">Good morning</div>
+          <div class="sc-greeting-name" style="color:#EFF6FF;">Ehsan Ahmad</div>
+        </div>
+
+        <div class="sc-stats" style="background:linear-gradient(135deg,#0D1526 0%,#162040 100%); border:1px solid #1E3A5F;">
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#EFF6FF;">12</span>
+            <span class="sc-stat-lbl" style="color:#1E3A5F;">Active</span>
+          </div>
+          <div class="sc-stat-item" style="border-left:1px solid #1E3A5F; border-right:1px solid #1E3A5F;">
+            <span class="sc-stat-val" style="color:#60A5FA;">$840</span>
+            <span class="sc-stat-lbl" style="color:#1E3A5F;">Earned</span>
+          </div>
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#EFF6FF;">5</span>
+            <span class="sc-stat-lbl" style="color:#1E3A5F;">Applied</span>
+          </div>
+        </div>
+
+        <div class="sc-section-hdr">
+          <span class="sc-section-title" style="color:#BFDBFE;">Campaigns</span>
+          <span class="sc-see-all" style="color:#3B82F6;">See all</span>
+        </div>
+
+        <div class="sc-campaign" style="background:#0D1526; border:1px solid #1E3A5F;">
+          <div class="sc-camp-dot" style="background:#2563EB30;">👟</div>
+          <div>
+            <div class="sc-camp-name" style="color:#EFF6FF;">Nike Summer Drop</div>
+            <div class="sc-camp-sub" style="color:#3D5A80;">$500 · Fashion</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#2563EB25; color:#60A5FA;">Open</div>
+        </div>
+
+        <div class="sc-campaign" style="background:#0D1526; border:1px solid #1E3A5F;">
+          <div class="sc-camp-dot" style="background:#162040;">✨</div>
+          <div>
+            <div class="sc-camp-name" style="color:#EFF6FF;">Zara Collab</div>
+            <div class="sc-camp-sub" style="color:#3D5A80;">$300 · Lifestyle</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#162040; color:#64748B;">New</div>
+        </div>
+
+        <div class="sc-cta" style="background:#2563EB; color:#fff;">Browse All Campaigns</div>
+
+        <div class="sc-nav" style="border-top:1px solid #1E3A5F; margin-top:14px;">
+          <div class="sc-nav-item" style="color:#3B82F6;">
+            <span class="sc-nav-icon">⚡</span>
+            <div class="sc-nav-dot" style="background:#3B82F6;"></div>
+          </div>
+          <div class="sc-nav-item" style="color:#1E3A5F;"><span class="sc-nav-icon">🔍</span></div>
+          <div class="sc-nav-item" style="color:#1E3A5F;"><span class="sc-nav-icon">💬</span></div>
+          <div class="sc-nav-item" style="color:#1E3A5F;"><span class="sc-nav-icon">👤</span></div>
+        </div>
+      </div>
+
+      <div class="palette-bar" style="background:#0A1020; border-top:1px solid #1E3A5F;">
+        <div class="pb-swatch" style="background:#070B14;"></div>
+        <div class="pb-swatch" style="background:#0D1526;"></div>
+        <div class="pb-swatch" style="background:#2563EB;"></div>
+        <div class="pb-swatch" style="background:#60A5FA;"></div>
+        <span class="pb-name" style="color:#BFDBFE;">Sapphire Dark</span>
+        <span class="pb-hex" style="color:#1E3A5F;">#070B14</span>
+      </div>
+      <div class="chips-row" style="background:#0A1020;">
+        <div class="chip" style="background:#070B14;"></div>
+        <div class="chip" style="background:#0D1526; flex:1.5;"></div>
+        <div class="chip" style="background:#1E3A5F;"></div>
+        <div class="chip" style="background:#2563EB; flex:2;"></div>
+        <div class="chip" style="background:#60A5FA;"></div>
+      </div>
+    </div>
+
+    <!-- DARK C: Pure Black + White + Blue accent -->
+    <div class="phone-frame" style="box-shadow: 0 32px 80px rgba(255,255,255,0.04), 0 1px 0 #111; background:#080808;">
+      <div class="notch" style="background:#000;"></div>
+      <div class="variant-tag" style="background:#fff; color:#080808;">F · Stark</div>
+
+      <div class="phone-screen" style="background:#080808;">
+        <div class="sc-topbar">
+          <div class="sc-logo" style="color:#FFFFFF;">Etholinc</div>
+          <div class="sc-icons">
+            <div class="sc-icon-btn" style="background:#141414; color:#666;">🔔</div>
+            <div class="sc-icon-btn" style="background:#fff; color:#080808; border-radius:50%; font-weight:700;">E</div>
+          </div>
+        </div>
+
+        <div class="sc-greeting">
+          <div class="sc-greeting-sub" style="color:#333;">Good morning</div>
+          <div class="sc-greeting-name" style="color:#FFFFFF;">Ehsan Ahmad</div>
+        </div>
+
+        <div class="sc-stats" style="background:#111111; border:1px solid #222;">
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">12</span>
+            <span class="sc-stat-lbl" style="color:#333;">Active</span>
+          </div>
+          <div class="sc-stat-item" style="border-left:1px solid #222; border-right:1px solid #222;">
+            <span class="sc-stat-val" style="color:#4D9EFF;">$840</span>
+            <span class="sc-stat-lbl" style="color:#333;">Earned</span>
+          </div>
+          <div class="sc-stat-item">
+            <span class="sc-stat-val" style="color:#fff;">5</span>
+            <span class="sc-stat-lbl" style="color:#333;">Applied</span>
+          </div>
+        </div>
+
+        <div class="sc-section-hdr">
+          <span class="sc-section-title" style="color:#aaa;">Campaigns</span>
+          <span class="sc-see-all" style="color:#4D9EFF;">See all</span>
+        </div>
+
+        <div class="sc-campaign" style="background:#111; border:1px solid #222;">
+          <div class="sc-camp-dot" style="background:#1A1A1A;">👟</div>
+          <div>
+            <div class="sc-camp-name" style="color:#fff;">Nike Summer Drop</div>
+            <div class="sc-camp-sub" style="color:#444;">$500 · Fashion</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#4D9EFF20; color:#4D9EFF;">Open</div>
+        </div>
+
+        <div class="sc-campaign" style="background:#111; border:1px solid #222;">
+          <div class="sc-camp-dot" style="background:#1A1A1A;">✨</div>
+          <div>
+            <div class="sc-camp-name" style="color:#fff;">Zara Collab</div>
+            <div class="sc-camp-sub" style="color:#444;">$300 · Lifestyle</div>
+          </div>
+          <div class="sc-camp-tag" style="background:#222; color:#555;">New</div>
+        </div>
+
+        <div class="sc-cta" style="background:#fff; color:#080808; font-weight:700;">Browse All Campaigns</div>
+
+        <div class="sc-nav" style="border-top:1px solid #1A1A1A; margin-top:14px;">
+          <div class="sc-nav-item" style="color:#fff;">
+            <span class="sc-nav-icon">⚡</span>
+            <div class="sc-nav-dot" style="background:#fff;"></div>
+          </div>
+          <div class="sc-nav-item" style="color:#333;"><span class="sc-nav-icon">🔍</span></div>
+          <div class="sc-nav-item" style="color:#333;"><span class="sc-nav-icon">💬</span></div>
+          <div class="sc-nav-item" style="color:#333;"><span class="sc-nav-icon">👤</span></div>
+        </div>
+      </div>
+
+      <div class="palette-bar" style="background:#0E0E0E; border-top:1px solid #1A1A1A;">
+        <div class="pb-swatch" style="background:#080808; border:1px solid #222;"></div>
+        <div class="pb-swatch" style="background:#111111;"></div>
+        <div class="pb-swatch" style="background:#4D9EFF;"></div>
+        <div class="pb-swatch" style="background:#ffffff;"></div>
+        <span class="pb-name" style="color:#888;">Stark Mono</span>
+        <span class="pb-hex" style="color:#333;">#080808</span>
+      </div>
+      <div class="chips-row" style="background:#0E0E0E;">
+        <div class="chip" style="background:#080808; border:1px solid #222;"></div>
+        <div class="chip" style="background:#111; flex:1.5;"></div>
+        <div class="chip" style="background:#222;"></div>
+        <div class="chip" style="background:#4D9EFF; flex:1.5;"></div>
+        <div class="chip" style="background:#fff;"></div>
+      </div>
+    </div>
+
+  </div><!-- /phone-row -->
+
+  <div class="theme-desc">
+    <div class="desc-card">
+      <div class="desc-card-title">D · Arctic Night</div>
+      <div class="desc-card-body">
+        <strong>#090E18</strong> near-black with layered blue-slate surfaces and <strong>arctic blue #0EA5E9</strong> accent. Subtle, cool, high-contrast. Reads like a Bloomberg Terminal — data-forward and serious.
+      </div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-card-title">E · Sapphire Dark</div>
+      <div class="desc-card-body">
+        <strong>#070B14</strong> with deep navy layers and <strong>sapphire #2563EB</strong>. The blue surfaces create depth without being bright. Most polished of the three dark variants. Closest to Linear or Vercel dark mode.
+      </div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-card-title">F · Stark Mono</div>
+      <div class="desc-card-body">
+        Pure <strong>#080808</strong> black with white typography and a single <strong>#4D9EFF</strong> accent. Maximum contrast, minimal colour. Feels premium like Apple's dark UI — bold and uncompromising.
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
